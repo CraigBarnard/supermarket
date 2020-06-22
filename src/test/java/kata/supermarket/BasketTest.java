@@ -62,11 +62,11 @@ class BasketTest {
     }
 
     private static Item aPintOfMilk() {
-        return new Product(new BigDecimal("0.49")).oneOf();
+        return new Product("pintMilk", new BigDecimal("0.49"), new BuyOneGetOneFree()).oneOf();
     }
 
     private static Item aPackOfDigestives() {
-        return new Product(new BigDecimal("1.55")).oneOf();
+        return new Product("digestives", new BigDecimal("1.55")).oneOf();
     }
 
     private static WeighedProduct aKiloOfAmericanSweets() {

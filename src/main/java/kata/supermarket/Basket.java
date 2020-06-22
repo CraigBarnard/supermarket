@@ -1,8 +1,10 @@
 package kata.supermarket;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,15 +41,11 @@ public class Basket {
                     .setScale(2, RoundingMode.HALF_UP);
         }
 
-        /**
-         * TODO: This could be a good place to apply the results of
-         *  the discount calculations.
-         *  It is not likely to be the best place to do those calculations.
-         *  Think about how Basket could interact with something
-         *  which provides that functionality.
-         */
         private BigDecimal discounts() {
-            return BigDecimal.ZERO;
+            List<BigDecimal> discount = new ArrayList<>(Arrays.asList(BigDecimal.ZERO));
+            items.stream().distinct()
+                    .forEach(item -> discount.add(item.discount(Collections.frequency(items, item))));
+            return discount.stream().reduce(BigDecimal::add).get();
         }
 
         private BigDecimal calculate() {
